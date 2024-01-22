@@ -1,9 +1,6 @@
 #!/bin/bash
 
-cmake -DCMAKE_BUILD_TYPE=Release      \
-      -DCMAKE_INSTALL_PREFIX=$PREFIX  \
-      -DCMAKE_PREFIX_PATH=$PREFIX     \
-      -DCMAKE_INSTALL_LIBDIR=lib      \
-      $SRC_DIR
+export DISABLE_AUTOBREW=1
 
-make install
+# shellcheck disable=SC2086
+${R} CMD INSTALL --build . ${R_ARGS}
