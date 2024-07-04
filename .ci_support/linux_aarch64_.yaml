@@ -1,3 +1,7 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+cdt_arch:
+- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -9,7 +13,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '12'
 docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-aarch64
 pin_run_as_build:
   r-base:
     min_pin: x.x
@@ -17,6 +21,4 @@ pin_run_as_build:
 r_base:
 - '4.3'
 target_platform:
-- linux-ppc64le
-zeromq:
-- 4.3.5
+- linux-aarch64
