@@ -1,7 +1,7 @@
 {% set name = "xeus-r" %}
 
-{% set version = "0.1.0" %}
-{% set sha256 = "0f41509741949a46dcf8dce417a1223fc11c2e8e995e439903ac9bdcd3e4b71b" %}
+{% set version = "0.2.0" %}
+{% set sha256 = "31c4a53a672f7874f1c154f24fe7e64481e9bbba5b8c15929aac22f94042f1d3" %}
 
 package:
   name: {{ name|lower }}
@@ -22,17 +22,15 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - cmake
     - make  # [unix]
   host:
-    - xeus
-    - xeus-zmq >=1.0.2,<2.0
-    - nlohmann_json
-    - cppzmq
-    - xtl
+    - xeus >=5
+    - xeus-zmq >=3.0,<4.0
+    - nlohmann_json >=3.11.3,<4
     - r-base
     - libopenblas
-    - zeromq
   run:
     - r-base
     - r-evaluate
