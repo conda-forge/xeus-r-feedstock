@@ -19,14 +19,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/xeus-r-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/xeus-r-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -211,6 +204,7 @@ Feedstock Maintainers
 =====================
 
 * [@DerThorsten](https://github.com/DerThorsten/)
+* [@IsabelParedes](https://github.com/IsabelParedes/)
 * [@JohanMabille](https://github.com/JohanMabille/)
 * [@SylvainCorlay](https://github.com/SylvainCorlay/)
 * [@romainfrancois](https://github.com/romainfrancois/)
