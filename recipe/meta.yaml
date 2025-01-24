@@ -13,7 +13,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -39,6 +39,7 @@ requirements:
     - r-cli
     - r-repr
     - r-IRdisplay
+    - r-r6
 
 test:
   commands:
