@@ -1,7 +1,7 @@
 {% set name = "xeus-r" %}
 
-{% set version = "0.3.2" %}
-{% set sha256 = "a7a7ef2584db280a135a0870bbd7aac3a4dcdf210586a35b573a670a9aea4db4" %}
+{% set version = "0.4.0" %}
+{% set sha256 = "d782473291385cefe9f7fb4bfa43a2eb05037eb4008342a2e3116ff7c50485b0" %}
 
 package:
   name: {{ name|lower }}
@@ -26,20 +26,32 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - make  # [unix]
+    - r-base  # [osx]
+    - cross-r-base  # [osx]
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
     - nlohmann_json >=3.11.3,<4
     - r-base
+    # Dependencies for hera
+    - r-cli
+    - r-evaluate
+    - r-glue
+    - r-IRdisplay
+    - r-jsonlite
+    - r-r6
+    - r-repr
+    - r-rlang
   run:
     - r-base
-    - r-evaluate
-    - r-jsonlite
-    - r-glue
     - r-cli
-    - r-repr
+    - r-evaluate
+    - r-glue
     - r-IRdisplay
+    - r-jsonlite
     - r-r6
+    - r-repr
+    - r-rlang
 
 test:
   commands:
