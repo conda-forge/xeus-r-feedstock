@@ -16,6 +16,9 @@ if [[ "${target_platform}" == "osx-arm64" ]]; then
     echo "[DEBUG] Replacing R"
     rm $PREFIX/lib/R/bin/exec/R
     cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
+    echo "[DEBUG] Replacing libR"
+    rm $PREFIX/lib/R/lib/libR.dylib
+    cp $BUILD_PREFIX/lib/R/lib/libR.dylib $PREFIX/lib/R/lib/libR.dylib
 fi
 
 mkdir build && cd build
