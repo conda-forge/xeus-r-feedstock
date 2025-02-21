@@ -9,6 +9,15 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
 fi
 
+echo "[DEBUG] build: ${build_platform}"
+echo "[DEBUG] target: ${target_platform}"
+
+if [[ "${target_platform}" == "osx-arm64" ]]; then
+    echo "[DEBUG] Replacing R"
+    rm $PREFIX/lib/R/bin/exec/R
+    cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
+fi
+
 mkdir build && cd build
 
 cmake ${CMAKE_ARGS} \
