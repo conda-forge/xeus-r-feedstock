@@ -9,15 +9,6 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
 fi
 
-echo "[DEBUG] build platform: ${build_platform}"
-echo "[DEBUG] build prefix: $BUILD_PREFIX"
-echo "[DEBUG] prefix: $PREFIX"
-
-if [[ "${build_platform}" == "osx-64" ]]; then
-    echo "[DEBUG] Moving R"
-    cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
-fi
-
 mkdir build && cd build
 
 cmake ${CMAKE_ARGS} \
