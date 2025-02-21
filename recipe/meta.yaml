@@ -31,7 +31,17 @@ requirements:
     - xeus-zmq >=3.0,<4.0
     - nlohmann_json >=3.11.3,<4
     - r-base
+    # Dependencies for hera
+    - r-cli
+    - r-evaluate
+    - r-glue
+    - r-IRdisplay
+    - r-jsonlite
+    - r-r6
+    - r-repr
+    - r-rlang
   run:
+    - r-base
     - r-cli
     - r-evaluate
     - r-glue
