@@ -27,6 +27,7 @@ requirements:
     - cmake
     - make  # [unix]
     - r-base  # [osx]
+    - cross-r-base  # [osx]
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
