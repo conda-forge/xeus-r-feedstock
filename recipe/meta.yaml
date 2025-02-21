@@ -26,7 +26,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - make  # [unix]
-    - r-base # [osx]
+    - r-base  # [osx]
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
