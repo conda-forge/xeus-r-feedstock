@@ -9,12 +9,6 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
 fi
 
-# Only for building hera
-if [[ "${build_platform}" == "osx-64" ]]; then
-    mv $PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R.bak
-    cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
-fi
-
 mkdir build && cd build
 
 cmake ${CMAKE_ARGS} \
@@ -25,9 +19,3 @@ cmake ${CMAKE_ARGS} \
       $SRC_DIR
 
 make install
-
-# Restore
-if [[ "${build_platform}" == "osx-64" ]]; then
-    rm $PREFIX/lib/R/bin/exec/R
-    mv $PREFIX/lib/R/bin/exec/R.bak $PREFIX/lib/R/bin/exec/R
-fi
