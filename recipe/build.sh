@@ -13,12 +13,12 @@ echo "[DEBUG] build: ${build_platform}"
 echo "[DEBUG] target: ${target_platform}"
 
 if [[ "${target_platform}" == "osx-arm64" ]]; then
-    echo "[DEBUG] Replacing R"
-    rm $PREFIX/lib/R/bin/exec/R
-    cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
-    echo "[DEBUG] Replacing libR"
-    rm $PREFIX/lib/R/lib/libR.dylib
-    cp $BUILD_PREFIX/lib/R/lib/libR.dylib $PREFIX/lib/R/lib/libR.dylib
+    echo "[DEBUG] Linking R"
+    rm $PREFIX/bin/R
+    ln -s $BUILD_PREFIX/bin/R $PREFIX/bin/R
+    echo "[DEBUG] Linking Rscript"
+    rm $PREFIX/bin/Rscript
+    ln -s $BUILD_PREFIX/bin/R $PREFIX/bin/Rscript
 fi
 
 mkdir build && cd build
