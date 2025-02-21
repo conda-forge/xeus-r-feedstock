@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 # r-base depends on make, which is therefore installed in the host environment.
 # When cross-compiling, cmake picks up the version of make installed in the host
 # environment to compile the test program.
@@ -7,7 +9,11 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
 fi
 
-echo "BUILD PLATFORM: ${build_platform}"
+# Only for building hera
+if [[ "${build_platform}" == "osx-64" ]]; then
+    mv $PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R.bak
+    cp $BUILD_PREFIX/lib/R/bin/exec/R $PREFIX/lib/R/bin/exec/R
+fi
 
 mkdir build && cd build
 
@@ -19,3 +25,9 @@ cmake ${CMAKE_ARGS} \
       $SRC_DIR
 
 make install
+
+# Restore
+if [[ "${build_platform}" == "osx-64" ]]; then
+    rm $PREFIX/lib/R/bin/exec/R
+    mv $PREFIX/lib/R/bin/exec/R.bak $PREFIX/lib/R/bin/exec/R
+fi
