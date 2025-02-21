@@ -7,6 +7,8 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
 fi
 
+echo "BUILD PLATFORM: ${build_platform}"
+
 mkdir build && cd build
 
 cmake ${CMAKE_ARGS} \
