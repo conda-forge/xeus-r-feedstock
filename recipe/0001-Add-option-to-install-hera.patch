@@ -15,7 +15,7 @@ index 5bd6812..925c444 100644
  option(XEUS_R_USE_SHARED_XEUS_R "Link xr  with the xeus-r shared library (instead of the static library)" ON)
  option(XEUS_R_EMSCRIPTEN_WASM_BUILD "Build for wasm with emscripten" OFF)
  
-+option(INSTALL_HERA "Install the hera R package" ON)
++option(XEUS_R_INSTALL_HERA "Install the hera R package" ON)
 +
  if(EMSCRIPTEN)
      add_compile_definitions(XEUS_R_EMSCRIPTEN_WASM_BUILD)
@@ -31,7 +31,7 @@ index 5bd6812..925c444 100644
 -        --build ../hera --library=${R_HOME}/library
 -        RESULT_VARIABLE hera_result
 -    )
-+if(INSTALL_HERA)
++if(XEUS_R_INSTALL_HERA)
  
 -else()
 -    execute_process(COMMAND ${R_COMMAND} CMD INSTALL
