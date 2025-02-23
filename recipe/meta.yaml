@@ -77,6 +77,7 @@ test:
     - test -f ${PREFIX}/include/xeus-r/xinterpreter.hpp                                     # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfig.cmake                                 # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfigVersion.cmake                          # [unix]
+    - test -f ${PREFIX}/lib/R/library/hera/R/hera.rdb
 
     - if not exist %LIBRARY_BIN%\\xr.exe (exit 1)                                           # [win]
     - if not exist %LIBRARY_PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)      # [win]
