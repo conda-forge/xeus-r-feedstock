@@ -85,7 +85,9 @@ test:
     - if not exist %LIBRARY_LIB%\\cmake\\xeus-r\\xeus-rConfigVersion.cmake (exit 1)         # [win]
     # The kernel spec in installed in the general PREFIX
     - if not exist %PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)              # [win]
-    - if not exist %PREFIX%\\lib\\R\\library\\hera\\R\\hera.rdb (exit 1)                    # [win]
+
+    - $R -e "library('hera')"           # [not win]
+    - "\"%R%\" -e \"library('hera')\""  # [win]
 
 
 about:
