@@ -6,19 +6,14 @@ set -eux
 # When cross-compiling, cmake picks up the version of make installed in the host
 # environment to compile the test program.
 if [[ "${build_platform}" != "${target_platform}" ]]; then
-    CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make" 
-fi
+    CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make"
 
-echo "[DEBUG] build: ${build_platform}"
-echo "[DEBUG] target: ${target_platform}"
-
-if [[ "${target_platform}" == "osx-arm64" ]]; then
-    echo "[DEBUG] Linking R"
-    rm $PREFIX/bin/R
-    ln -s $BUILD_PREFIX/bin/R $PREFIX/bin/R
-    echo "[DEBUG] Linking Rscript"
-    rm $PREFIX/bin/Rscript
-    ln -s $BUILD_PREFIX/bin/R $PREFIX/bin/Rscript
+    pushd hera
+        ${R} CMD INSTALL --build . ${R_ARGS} --library=${PREFIX}/lib/R/library
+    popd
+    export INSTALL_HERA="OFF"
+else
+    export INSTALL_HERA="ON"
 fi
 
 mkdir build && cd build
@@ -28,6 +23,7 @@ cmake ${CMAKE_ARGS} \
       -DCMAKE_INSTALL_PREFIX=$PREFIX  \
       -DCMAKE_PREFIX_PATH=$PREFIX     \
       -DCMAKE_INSTALL_LIBDIR=lib      \
+      -DINSTALL_HERA=${INSTALL_HERA}  \
       $SRC_DIR
 
 make install
