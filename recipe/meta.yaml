@@ -30,6 +30,16 @@ requirements:
     - make  # [unix]
     - r-base  # [osx]
     - cross-r-base  # [osx]
+    # Dependencies for hera
+    - r-rlang
+    - r-jsonlite
+    - r-base64enc
+    - r-digest
+    - r-fastmap
+    - r-htmltools
+    - r-cli
+    - r-glue
+    - r-vctrs
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
