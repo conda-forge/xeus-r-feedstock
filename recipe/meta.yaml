@@ -77,7 +77,7 @@ test:
     - test -f ${PREFIX}/include/xeus-r/xinterpreter.hpp                                     # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfig.cmake                                 # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfigVersion.cmake                          # [unix]
-    - test -f ${PREFIX}/lib/R/library/hera/R/hera.rdb
+    - test -f ${PREFIX}/lib/R/library/hera/R/hera.rdb                                       # [unix]
 
     - if not exist %LIBRARY_BIN%\\xr.exe (exit 1)                                           # [win]
     - if not exist %LIBRARY_PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)      # [win]
@@ -85,6 +85,7 @@ test:
     - if not exist %LIBRARY_LIB%\\cmake\\xeus-r\\xeus-rConfigVersion.cmake (exit 1)         # [win]
     # The kernel spec in installed in the general PREFIX
     - if not exist %PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)              # [win]
+    - if not exist %PREFIX%\\lib\\R\\library\\hera\\R\\hera.rdb (exit 1)                    # [win]
 
 
 about:
