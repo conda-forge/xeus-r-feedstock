@@ -1,7 +1,7 @@
 {% set name = "xeus-r" %}
 
-{% set version = "0.3.2" %}
-{% set sha256 = "a7a7ef2584db280a135a0870bbd7aac3a4dcdf210586a35b573a670a9aea4db4" %}
+{% set version = "0.4.0" %}
+{% set sha256 = "d782473291385cefe9f7fb4bfa43a2eb05037eb4008342a2e3116ff7c50485b0" %}
 
 package:
   name: {{ name|lower }}
@@ -11,6 +11,8 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/jupyter-xeus/xeus-r/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-Add-option-to-install-hera.patch
 
 build:
   number: 0
@@ -25,21 +27,42 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - cmake
-    - make  # [unix]
+    - make          # [unix]
+    # Dependencies for hera
+    - r-base        # [build_platform != target_platform]
+    - cross-r-base  # [build_platform != target_platform]
+    - r-cli         # [build_platform != target_platform]
+    - r-evaluate    # [build_platform != target_platform]
+    - r-glue        # [build_platform != target_platform]
+    - r-IRDisplay   # [build_platform != target_platform]
+    - r-jsonlite    # [build_platform != target_platform]
+    - r-r6          # [build_platform != target_platform]
+    - r-repr        # [build_platform != target_platform]
+    - r-rlang       # [build_platform != target_platform]
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
     - nlohmann_json >=3.11.3,<4
     - r-base
+    # Dependencies for hera
+    - r-cli
+    - r-evaluate
+    - r-glue
+    - r-IRdisplay
+    - r-jsonlite
+    - r-r6
+    - r-repr
+    - r-rlang
   run:
     - r-base
-    - r-evaluate
-    - r-jsonlite
-    - r-glue
     - r-cli
-    - r-repr
+    - r-evaluate
+    - r-glue
     - r-IRdisplay
+    - r-jsonlite
     - r-r6
+    - r-repr
+    - r-rlang
 
 test:
   commands:
@@ -49,6 +72,7 @@ test:
     - test -f ${PREFIX}/include/xeus-r/xinterpreter.hpp                                     # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfig.cmake                                 # [unix]
     - test -f ${PREFIX}/lib/cmake/xeus-r/xeus-rConfigVersion.cmake                          # [unix]
+    - test -f ${PREFIX}/lib/R/library/hera/R/hera.rdb                                       # [unix]
 
     - if not exist %LIBRARY_BIN%\\xr.exe (exit 1)                                           # [win]
     - if not exist %LIBRARY_PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)      # [win]
@@ -56,6 +80,9 @@ test:
     - if not exist %LIBRARY_LIB%\\cmake\\xeus-r\\xeus-rConfigVersion.cmake (exit 1)         # [win]
     # The kernel spec in installed in the general PREFIX
     - if not exist %PREFIX%\\share\\jupyter\\kernels\\xr\\kernel.json (exit 1)              # [win]
+
+    - $R -e "library('hera')"           # [not win]
+    - "\"%R%\" -e \"library('hera')\""  # [win]
 
 
 about:
