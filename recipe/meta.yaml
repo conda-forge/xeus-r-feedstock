@@ -27,23 +27,23 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - cmake
-    - make  # [unix]
-    - r-base  # [osx]
-    - cross-r-base  # [osx]
+    - make          # [unix]
+    - r-base        # [build_platform != target_platform]
+    - cross-r-base  # [build_platform != target_platform]
     # Dependencies for hera
-    - r-rlang
-    - r-jsonlite
-    - r-base64enc
-    - r-digest
-    - r-fastmap
-    - r-htmltools
-    - r-cli
-    - r-glue
-    - r-vctrs
-    - r-evaluate
-    - r-IRdisplay
-    - r-r6
-    - r-repr
+    - r-rlang       # [build_platform != target_platform]
+    - r-jsonlite    # [build_platform != target_platform]
+    - r-base64enc   # [build_platform != target_platform]
+    - r-digest      # [build_platform != target_platform]
+    - r-fastmap     # [build_platform != target_platform]
+    - r-htmltools   # [build_platform != target_platform]
+    - r-cli         # [build_platform != target_platform]
+    - r-glue        # [build_platform != target_platform]
+    - r-vctrs       # [build_platform != target_platform]
+    - r-evaluate    # [build_platform != target_platform]
+    - r-IRdisplay   # [build_platform != target_platform]
+    - r-r6          # [build_platform != target_platform]
+    - r-repr        # [build_platform != target_platform]
   host:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
