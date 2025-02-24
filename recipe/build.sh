@@ -2,18 +2,16 @@
 
 set -eux
 
+export INSTALL_HERA="ON"
+
 # r-base depends on make, which is therefore installed in the host environment.
 # When cross-compiling, cmake picks up the version of make installed in the host
 # environment to compile the test program.
 if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make"
 
-    pushd hera
-        ${R} CMD INSTALL --build . ${R_ARGS} --library=${PREFIX}/lib/R/library
-    popd
+    ${R} CMD INSTALL --build ./hera ${R_ARGS} --library=${PREFIX}/lib/R/library
     export INSTALL_HERA="OFF"
-else
-    export INSTALL_HERA="ON"
 fi
 
 mkdir build && cd build
