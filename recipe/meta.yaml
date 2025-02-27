@@ -28,7 +28,6 @@ requirements:
     - make          # [unix]
     # Dependencies for hera
     - r-base        # [build_platform != target_platform]
-    - cross-r-base  # [build_platform != target_platform]
     - r-cli         # [build_platform != target_platform]
     - r-evaluate    # [build_platform != target_platform]
     - r-glue        # [build_platform != target_platform]
