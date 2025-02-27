@@ -8,7 +8,7 @@ set -eux
 if [[ "${build_platform}" != "${target_platform}" ]]; then
     CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_MAKE_PROGRAM=${BUILD_PREFIX}/bin/make"
 
-    $BUILD_PREFIX CMD INSTALL ./hera --no-byte-compile --no-test-load \
+    $BUILD_PREFIX/bin/R CMD INSTALL ./hera --no-byte-compile --no-test-load \
         --library=${PREFIX}/lib/R/library
 fi
 
