@@ -28,6 +28,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake
     - make          # [unix]
+    - pkg-config
     # Dependencies for hera
     - r-base        # [build_platform != target_platform]
     - cross-r-base  # [build_platform != target_platform]
