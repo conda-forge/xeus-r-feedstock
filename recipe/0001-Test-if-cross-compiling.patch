@@ -1,14 +1,14 @@
-From 45a1acbb587e128e7e4c319b5c0ee990bad49cce Mon Sep 17 00:00:00 2001
+From 7a18833fb74e58d88fb841f86695ba6b0eb345bb Mon Sep 17 00:00:00 2001
 From: Isabel Paredes <isabel.paredes@quantstack.net>
-Date: Thu, 27 Feb 2025 18:06:54 +0100
+Date: Thu, 27 Feb 2025 18:32:20 +0100
 Subject: [PATCH] Test if cross-compiling
 
 ---
- CMakeLists.txt | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ CMakeLists.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1850f1f..e7aaa81 100644
+index 1850f1f..f13a28f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -13,7 +13,9 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
@@ -22,3 +22,21 @@ index 1850f1f..e7aaa81 100644
      set(XEUS_R_CROSS_COMPILING ON)
  else()
      set(XEUS_R_CROSS_COMPILING OFF)
+@@ -58,8 +60,6 @@ option(XEUS_R_USE_SHARED_XEUS "Link xr  with the xeus shared library (instead of
+ option(XEUS_R_USE_SHARED_XEUS_R "Link xr  with the xeus-r shared library (instead of the static library)" ON)
+ option(XEUS_R_EMSCRIPTEN_WASM_BUILD "Build for wasm with emscripten" OFF)
+ 
+-option(INSTALL_HERA "Install the hera R package" ON)
+-
+ if(EMSCRIPTEN)
+     add_compile_definitions(XEUS_R_EMSCRIPTEN_WASM_BUILD)
+     message("Build with emscripten")
+@@ -97,7 +97,7 @@ message(STATUS "R_SCRIPT_COMMAND = ${R_SCRIPT_COMMAND}")
+ # ======================
+ 
+ # When cross-compiling, hera should be installed before building the project
+-if(NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "${CMAKE_HOST_SYSTEM_NAME}")
++if(XEUS_R_CROSS_COMPILING)
+     if(NOT EXISTS "${R_HOME}/library/hera")
+         message(FATAL_ERROR "R 📦 hera is not installed")
+     endif()
