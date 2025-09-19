@@ -42,6 +42,7 @@ requirements:
     - xeus >=5
     - xeus-zmq >=3.0,<4.0
     - nlohmann_json >=3.11.3,<4
+    - nlohmann_json-abi
     - r-base
     # Dependencies for hera
     - r-cli
