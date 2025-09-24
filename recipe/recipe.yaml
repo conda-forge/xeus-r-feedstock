@@ -1,0 +1,100 @@
+context:
+  name: xeus-r
+  version: 0.8.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jupyter-xeus/xeus-r/archive/${{ version }}.tar.gz
+  sha256: 86f923b010c1b328637d71d23bd5c7f5dc13e624a182bf499d69788823d458d5
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+    missing_dso_allowlist:
+      - if: win
+        then: '*/R.dll'
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+    - cmake
+    - pkg-config
+    - if: unix
+      then: make
+    - if: build_platform != target_platform
+      then:
+        # Dependencies for hera
+        - r-base
+        - cross-r-base
+        - r-cli
+        - r-evaluate
+        - r-glue
+        - r-IRDisplay
+        - r-jsonlite
+        - r-r6
+        - r-repr
+        - r-rlang
+  host:
+    - xeus >=5
+    - xeus-zmq >=3.0,<4.0
+    - nlohmann_json >=3.11.3,<4
+    - nlohmann_json-abi
+    - r-base
+    # Dependencies for hera
+    - r-cli
+    - r-evaluate
+    - r-glue
+    - r-IRdisplay
+    - r-jsonlite
+    - r-r6
+    - r-repr
+    - r-rlang
+  run:
+    - r-base
+    - r-cli
+    - r-evaluate
+    - r-glue
+    - r-IRdisplay
+    - r-jsonlite
+    - r-r6
+    - r-repr
+    - r-rlang
+
+tests:
+- package_contents:
+    files:
+      exists:
+        - ${{ "Library/" if win }}bin/xr${{ ".exe" if win }}
+        - ${{ "Library/" if win }}share/jupyter/kernels/xr/kernel.json
+        - ${{ "Library/" if win }}include/xeus-r/xinterpreter.hpp
+        - ${{ "Library/" if win }}lib/cmake/xeus-r/xeus-rConfig.cmake
+        - ${{ "Library/" if win }}lib/cmake/xeus-r/xeus-rConfigVersion.cmake
+        - lib/R/library/hera/R/hera.rdb
+
+- script:
+    - Rscript -e "library('hera')"
+
+about:
+  homepage: https://github.com/jupyter-xeus/xeus-r
+  license: GPL-3.0-only
+  license_family: GPL
+  license_file: LICENSE
+  summary: R kernel for Jupyter based on xeus
+  description: Jupyter kernel for the R programming language
+  documentation: https://github.com/jupyter-xeus/xeus-r
+  repository: https://github.com/jupyter-xeus/xeus-r
+
+extra:
+  recipe-maintainers:
+    - IsabelParedes
+    - JohanMabille
+    - DerThorsten
+    - SylvainCorlay
+    - romainfrancois
