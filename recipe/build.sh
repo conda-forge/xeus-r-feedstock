@@ -2,6 +2,13 @@
 
 set -eux
 
+# cc1: error: unknown value 'nocona' for '-march'
+# cc1: error: unknown value 'haswell' for '-mtune'
+unset CFLAGS
+unset CXXFLAGS
+unset CPPFLAGS
+unset LDFLAGS
+
 # r-base depends on make, which is therefore installed in the host environment.
 # When cross-compiling, cmake picks up the version of make installed in the host
 # environment to compile the test program.
